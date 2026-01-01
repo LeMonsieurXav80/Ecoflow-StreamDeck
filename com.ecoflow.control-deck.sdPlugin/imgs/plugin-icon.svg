@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <defs>
+    <linearGradient id="batteryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="144" height="144" rx="20" fill="#1a1a1a"/>
+  <!-- Battery body -->
+  <rect x="28" y="45" width="76" height="54" rx="6" fill="none" stroke="#4CAF50" stroke-width="4"/>
+  <!-- Battery tip -->
+  <rect x="104" y="60" width="12" height="24" rx="3" fill="#4CAF50"/>
+  <!-- Battery level -->
+  <rect x="34" y="51" width="52" height="42" rx="3" fill="url(#batteryGrad)"/>
+  <!-- Lightning bolt -->
+  <path d="M62 51 L52 72 L60 72 L56 93 L74 68 L64 68 L70 51 Z" fill="#FFD700"/>
+</svg>

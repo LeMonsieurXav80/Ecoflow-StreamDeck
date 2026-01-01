@@ -1,0 +1,170 @@
+/**
+ * Stream Deck Property Inspector Styles
+ * Based on Elgato Stream Deck SDK guidelines
+ */
+
+:root {
+  --sdpi-bgcolor: #2d2d2d;
+  --sdpi-color: #d8d8d8;
+  --sdpi-bordercolor: #3a3a3a;
+  --sdpi-buttonbordercolor: #969696;
+  --sdpi-background: #3d3d3d;
+  --sdpi-letterspacing: -0.5px;
+  --sdpi-fontweight: 600;
+  --sdpi-borderradius: 4px;
+}
+
+html,
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 9pt;
+  color: var(--sdpi-color);
+  background-color: var(--sdpi-bgcolor);
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.sdpi-wrapper {
+  padding: 0 16px;
+}
+
+.sdpi-heading {
+  font-size: 11pt;
+  font-weight: var(--sdpi-fontweight);
+  margin: 16px 0 8px 0;
+  letter-spacing: var(--sdpi-letterspacing);
+}
+
+.sdpi-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 8px 0;
+  min-height: 28px;
+}
+
+.sdpi-item-label {
+  flex: 0 0 90px;
+  font-weight: var(--sdpi-fontweight);
+  letter-spacing: var(--sdpi-letterspacing);
+}
+
+.sdpi-item-value {
+  flex: 1;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 9pt;
+  color: var(--sdpi-color);
+  background-color: var(--sdpi-background);
+  border: 1px solid var(--sdpi-bordercolor);
+  border-radius: var(--sdpi-borderradius);
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: #0078d7;
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  padding: 6px 16px;
+  font-size: 9pt;
+  font-weight: var(--sdpi-fontweight);
+  color: var(--sdpi-color);
+  background-color: var(--sdpi-background);
+  border: 1px solid var(--sdpi-buttonbordercolor);
+  border-radius: var(--sdpi-borderradius);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #4d4d4d;
+}
+
+button:active {
+  background-color: #5d5d5d;
+}
+
+.sdpi-info {
+  font-size: 8pt;
+  color: #888;
+  margin-top: 4px;
+}
+
+.sdpi-separator {
+  height: 1px;
+  background-color: var(--sdpi-bordercolor);
+  margin: 16px 0;
+}
+
+.sdpi-message {
+  padding: 8px 12px;
+  border-radius: var(--sdpi-borderradius);
+  margin: 8px 0;
+}
+
+.sdpi-message.info {
+  background-color: rgba(0, 120, 215, 0.2);
+  border: 1px solid rgba(0, 120, 215, 0.4);
+}
+
+.sdpi-message.warning {
+  background-color: rgba(255, 165, 0, 0.2);
+  border: 1px solid rgba(255, 165, 0, 0.4);
+}
+
+.sdpi-message.error {
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+}
+
+.sdpi-message.success {
+  background-color: rgba(0, 200, 0, 0.2);
+  border: 1px solid rgba(0, 200, 0, 0.4);
+}
+
+/* Hidden class */
+.hidden {
+  display: none !important;
+}
+
+/* Loading indicator */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Range slider */
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Number input with smaller width */
+input[type="number"].small {
+  width: 80px;
+}

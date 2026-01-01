@@ -1,0 +1,49 @@
+{
+  "name": "ecoflow-control-deck",
+  "version": "1.0.0",
+  "description": "Stream Deck plugin to monitor and control EcoFlow power stations",
+  "main": "dist/plugin.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "dev": "npm run watch",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist com.ecoflow.control-deck.sdPlugin/bin",
+    "pack": "npm run build && streamdeck pack com.ecoflow.control-deck.sdPlugin",
+    "link": "streamdeck link com.ecoflow.control-deck.sdPlugin",
+    "restart": "streamdeck restart com.ecoflow.control-deck"
+  },
+  "keywords": [
+    "streamdeck",
+    "elgato",
+    "ecoflow",
+    "power-station",
+    "battery",
+    "solar"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@elgato/cli": "^1.2.0",
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "rollup": "^4.9.6",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

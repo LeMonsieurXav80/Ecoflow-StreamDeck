@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- AC text -->
+  <text x="72" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#4CAF50">AC</text>
+  <!-- Power plug -->
+  <rect x="50" y="70" width="44" height="40" rx="6" fill="none" stroke="#4CAF50" stroke-width="4"/>
+  <rect x="62" y="78" width="6" height="16" rx="2" fill="#4CAF50"/>
+  <rect x="76" y="78" width="6" height="16" rx="2" fill="#4CAF50"/>
+</svg>

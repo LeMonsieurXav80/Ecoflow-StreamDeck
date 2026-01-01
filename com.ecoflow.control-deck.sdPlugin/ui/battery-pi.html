@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battery Status Settings</title>
+  <link rel="stylesheet" href="sdpi.css">
+</head>
+<body>
+  <div class="sdpi-wrapper">
+    <h2 class="sdpi-heading">Battery Status</h2>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Device</label>
+      <div class="sdpi-item-value">
+        <select id="deviceSerialNumber">
+          <option value="">Select a device...</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sdpi-separator"></div>
+
+    <h2 class="sdpi-heading">Display Options</h2>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Show Time</label>
+      <div class="sdpi-item-value">
+        <input type="checkbox" id="showRemainingTime">
+        <span class="sdpi-info">Show remaining time on button</span>
+      </div>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Low Battery</label>
+      <div class="sdpi-item-value">
+        <input type="number" id="lowBatteryThreshold" class="small" min="5" max="50" value="20">
+        <span class="sdpi-info">% threshold for warning</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="pi-common.js"></script>
+  <script>
+    // Additional settings specific to this action
+    function loadActionSettings(settings) {
+      document.getElementById("showRemainingTime").checked = settings.showRemainingTime || false;
+      document.getElementById("lowBatteryThreshold").value = settings.lowBatteryThreshold || 20;
+    }
+
+    function getActionSettings() {
+      return {
+        showRemainingTime: document.getElementById("showRemainingTime").checked,
+        lowBatteryThreshold: parseInt(document.getElementById("lowBatteryThreshold").value) || 20
+      };
+    }
+
+    // Override save to include action-specific settings
+    document.getElementById("showRemainingTime").addEventListener("change", saveSettings);
+    document.getElementById("lowBatteryThreshold").addEventListener("change", saveSettings);
+
+    function saveSettings() {
+      const baseSettings = {
+        deviceSerialNumber: document.getElementById("deviceSerialNumber").value
+      };
+      const actionSettings = getActionSettings();
+      sendSettings({ ...baseSettings, ...actionSettings });
+    }
+  </script>
+</body>
+</html>

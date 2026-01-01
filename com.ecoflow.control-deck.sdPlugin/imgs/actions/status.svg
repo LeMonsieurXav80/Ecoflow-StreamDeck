@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- WiFi-like signal icon -->
+  <path d="M72 100 L72 100" stroke="#4CAF50" stroke-width="12" stroke-linecap="round"/>
+  <path d="M48 80 A34 34 0 0 1 96 80" fill="none" stroke="#4CAF50" stroke-width="6" stroke-linecap="round"/>
+  <path d="M32 60 A56 56 0 0 1 112 60" fill="none" stroke="#4CAF50" stroke-width="6" stroke-linecap="round"/>
+</svg>

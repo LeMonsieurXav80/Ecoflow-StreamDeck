@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoFlow Control Deck - Global Settings</title>
+  <link rel="stylesheet" href="sdpi.css">
+</head>
+<body>
+  <div class="sdpi-wrapper">
+    <h2 class="sdpi-heading">EcoFlow API Configuration</h2>
+
+    <div class="sdpi-message info">
+      <p>To get API credentials, register at <strong>developer.ecoflow.com</strong> and create an Access Key.</p>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Access Key</label>
+      <div class="sdpi-item-value">
+        <input type="text" id="accessKey" placeholder="Your EcoFlow Access Key">
+      </div>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Secret Key</label>
+      <div class="sdpi-item-value">
+        <input type="password" id="secretKey" placeholder="Your EcoFlow Secret Key">
+      </div>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Region</label>
+      <div class="sdpi-item-value">
+        <select id="region">
+          <option value="us">United States / Global</option>
+          <option value="eu">Europe</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sdpi-separator"></div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label"></label>
+      <div class="sdpi-item-value">
+        <button id="saveBtn">Save Configuration</button>
+      </div>
+    </div>
+
+    <div id="statusMessage" class="sdpi-message hidden"></div>
+  </div>
+
+  <script>
+    // Stream Deck SDK connection
+    let websocket = null;
+    let pluginUUID = null;
+    let globalSettings = {};
+
+    // Initialize connection
+    function connectElgatoStreamDeckSocket(inPort, inPropertyInspectorUUID, inRegisterEvent, inInfo, inActionInfo) {
+      pluginUUID = inPropertyInspectorUUID;
+
+      websocket = new WebSocket("ws://127.0.0.1:" + inPort);
+
+      websocket.onopen = function() {
+        // Register with Stream Deck
+        const registerMessage = {
+          event: inRegisterEvent,
+          uuid: pluginUUID
+        };
+        websocket.send(JSON.stringify(registerMessage));
+
+        // Request global settings
+        requestGlobalSettings();
+      };
+
+      websocket.onmessage = function(evt) {
+        const message = JSON.parse(evt.data);
+
+        if (message.event === "didReceiveGlobalSettings") {
+          globalSettings = message.payload.settings || {};
+          loadSettings();
+        }
+      };
+    }
+
+    function requestGlobalSettings() {
+      if (websocket) {
+        websocket.send(JSON.stringify({
+          event: "getGlobalSettings",
+          context: pluginUUID
+        }));
+      }
+    }
+
+    function saveGlobalSettings() {
+      if (websocket) {
+        websocket.send(JSON.stringify({
+          event: "setGlobalSettings",
+          context: pluginUUID,
+          payload: globalSettings
+        }));
+      }
+    }
+
+    function loadSettings() {
+      document.getElementById("accessKey").value = globalSettings.accessKey || "";
+      document.getElementById("secretKey").value = globalSettings.secretKey || "";
+      document.getElementById("region").value = globalSettings.region || "us";
+    }
+
+    function showMessage(text, type) {
+      const msgEl = document.getElementById("statusMessage");
+      msgEl.textContent = text;
+      msgEl.className = "sdpi-message " + type;
+
+      setTimeout(() => {
+        msgEl.className = "sdpi-message hidden";
+      }, 3000);
+    }
+
+    // Event handlers
+    document.getElementById("saveBtn").addEventListener("click", function() {
+      globalSettings.accessKey = document.getElementById("accessKey").value.trim();
+      globalSettings.secretKey = document.getElementById("secretKey").value.trim();
+      globalSettings.region = document.getElementById("region").value;
+
+      if (!globalSettings.accessKey || !globalSettings.secretKey) {
+        showMessage("Please enter both Access Key and Secret Key", "error");
+        return;
+      }
+
+      saveGlobalSettings();
+      showMessage("Configuration saved!", "success");
+    });
+  </script>
+</body>
+</html>

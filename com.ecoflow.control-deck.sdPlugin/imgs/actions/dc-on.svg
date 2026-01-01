@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- DC text -->
+  <text x="72" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#4CAF50">DC</text>
+  <!-- USB symbol -->
+  <path d="M72 60 L72 100" stroke="#4CAF50" stroke-width="4"/>
+  <circle cx="72" cy="108" r="8" fill="none" stroke="#4CAF50" stroke-width="3"/>
+  <path d="M56 75 L72 60 L88 75" fill="none" stroke="#4CAF50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="52" y="75" width="8" height="12" rx="2" fill="#4CAF50"/>
+  <rect x="84" y="75" width="8" height="12" rx="2" fill="#4CAF50"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- Battery outline -->
+  <rect x="28" y="50" width="76" height="44" rx="6" fill="none" stroke="#4CAF50" stroke-width="4"/>
+  <rect x="104" y="62" width="12" height="20" rx="3" fill="#4CAF50"/>
+  <!-- Lightning bolt (charging) -->
+  <path d="M62 50 L48 72 L58 72 L52 94 L76 68 L64 68 L72 50 Z" fill="#FFD700"/>
+</svg>

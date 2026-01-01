@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+com.ecoflow.control-deck.sdPlugin/bin/
+
+# Packaged plugin
+*.streamDeckPlugin
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Claude Code
+.claude/
+CLAUDE.md

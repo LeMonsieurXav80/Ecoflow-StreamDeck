@@ -1,0 +1,177 @@
+{
+  "Name": "EcoFlow Control Deck",
+  "Version": "1.0.0",
+  "Author": "EcoFlow Control Deck",
+  "Description": "Monitor and control EcoFlow power stations from your Stream Deck. View battery status, power input/output, and toggle AC/DC outputs.",
+  "Category": "EcoFlow",
+  "CategoryIcon": "imgs/category-icon",
+  "Icon": "imgs/plugin-icon",
+  "URL": "https://github.com/your-repo/ecoflow-control-deck",
+  "CodePath": "bin/plugin.js",
+  "PropertyInspectorPath": "ui/property-inspector.html",
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.15"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Software": {
+    "MinimumVersion": "6.9"
+  },
+  "SDKVersion": 2,
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "enabled"
+  },
+  "Actions": [
+    {
+      "UUID": "com.ecoflow.control-deck.battery-status",
+      "Name": "Battery Status",
+      "Icon": "imgs/actions/battery",
+      "Tooltip": "Display EcoFlow battery percentage",
+      "States": [
+        {
+          "Image": "imgs/actions/battery",
+          "TitleAlignment": "middle",
+          "FontSize": "16"
+        }
+      ],
+      "PropertyInspectorPath": "ui/battery-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.input-power",
+      "Name": "Input Power",
+      "Icon": "imgs/actions/input",
+      "Tooltip": "Display power input (AC/Solar)",
+      "States": [
+        {
+          "Image": "imgs/actions/input",
+          "TitleAlignment": "middle",
+          "FontSize": "14"
+        }
+      ],
+      "PropertyInspectorPath": "ui/power-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.output-power",
+      "Name": "Output Power",
+      "Icon": "imgs/actions/output",
+      "Tooltip": "Display power output",
+      "States": [
+        {
+          "Image": "imgs/actions/output",
+          "TitleAlignment": "middle",
+          "FontSize": "14"
+        }
+      ],
+      "PropertyInspectorPath": "ui/power-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.solar-power",
+      "Name": "Solar Power",
+      "Icon": "imgs/actions/solar",
+      "Tooltip": "Display solar panel input",
+      "States": [
+        {
+          "Image": "imgs/actions/solar",
+          "TitleAlignment": "middle",
+          "FontSize": "14"
+        }
+      ],
+      "PropertyInspectorPath": "ui/power-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.ac-toggle",
+      "Name": "AC Output Toggle",
+      "Icon": "imgs/actions/ac-on",
+      "Tooltip": "Toggle AC output on/off",
+      "States": [
+        {
+          "Image": "imgs/actions/ac-off",
+          "TitleAlignment": "bottom",
+          "Title": "AC OFF"
+        },
+        {
+          "Image": "imgs/actions/ac-on",
+          "TitleAlignment": "bottom",
+          "Title": "AC ON"
+        }
+      ],
+      "PropertyInspectorPath": "ui/toggle-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.dc-toggle",
+      "Name": "DC/USB Toggle",
+      "Icon": "imgs/actions/dc-on",
+      "Tooltip": "Toggle DC and USB outputs on/off",
+      "States": [
+        {
+          "Image": "imgs/actions/dc-off",
+          "TitleAlignment": "bottom",
+          "Title": "DC OFF"
+        },
+        {
+          "Image": "imgs/actions/dc-on",
+          "TitleAlignment": "bottom",
+          "Title": "DC ON"
+        }
+      ],
+      "PropertyInspectorPath": "ui/toggle-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.charge-toggle",
+      "Name": "AC Charge Toggle",
+      "Icon": "imgs/actions/charge-on",
+      "Tooltip": "Toggle AC charging on/off",
+      "States": [
+        {
+          "Image": "imgs/actions/charge-off",
+          "TitleAlignment": "bottom",
+          "Title": "CHG OFF"
+        },
+        {
+          "Image": "imgs/actions/charge-on",
+          "TitleAlignment": "bottom",
+          "Title": "CHG ON"
+        }
+      ],
+      "PropertyInspectorPath": "ui/toggle-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.refresh",
+      "Name": "Manual Refresh",
+      "Icon": "imgs/actions/refresh",
+      "Tooltip": "Manually refresh EcoFlow data",
+      "States": [
+        {
+          "Image": "imgs/actions/refresh",
+          "TitleAlignment": "middle"
+        }
+      ],
+      "PropertyInspectorPath": "ui/refresh-pi.html"
+    },
+    {
+      "UUID": "com.ecoflow.control-deck.device-status",
+      "Name": "Device Status",
+      "Icon": "imgs/actions/status",
+      "Tooltip": "Display device online/offline status",
+      "States": [
+        {
+          "Image": "imgs/actions/status-offline",
+          "TitleAlignment": "middle",
+          "Title": "OFFLINE"
+        },
+        {
+          "Image": "imgs/actions/status-online",
+          "TitleAlignment": "middle",
+          "Title": "ONLINE"
+        }
+      ],
+      "PropertyInspectorPath": "ui/status-pi.html"
+    }
+  ]
+}

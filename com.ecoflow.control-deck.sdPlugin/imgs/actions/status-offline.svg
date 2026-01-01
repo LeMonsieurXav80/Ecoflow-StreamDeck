@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- Circle background -->
+  <circle cx="72" cy="72" r="40" fill="#F44336"/>
+  <!-- X mark -->
+  <path d="M54 54 L90 90 M90 54 L54 90" fill="none" stroke="white" stroke-width="8" stroke-linecap="round"/>
+</svg>

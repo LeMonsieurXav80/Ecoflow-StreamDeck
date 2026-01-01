@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- AC text -->
+  <text x="72" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#666">AC</text>
+  <!-- Power plug -->
+  <rect x="50" y="70" width="44" height="40" rx="6" fill="none" stroke="#666" stroke-width="4"/>
+  <rect x="62" y="78" width="6" height="16" rx="2" fill="#666"/>
+  <rect x="76" y="78" width="6" height="16" rx="2" fill="#666"/>
+  <!-- X mark -->
+  <path d="M30 114 L114 30" stroke="#F44336" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- Power symbol -->
+  <circle cx="44" cy="72" r="28" fill="none" stroke="#FF9800" stroke-width="5"/>
+  <path d="M44 50 L44 72" stroke="#FF9800" stroke-width="5" stroke-linecap="round"/>
+  <!-- Arrow pointing out -->
+  <path d="M80 72 L120 72 M105 57 L120 72 L105 87" fill="none" stroke="#FF9800" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
