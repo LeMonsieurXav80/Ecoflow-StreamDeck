@@ -13,10 +13,15 @@
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "resolveJsonModule": true
   },
+  // PAS de `experimentalDecorators` / `emitDecoratorMetadata` : ce sont les
+  // decorateurs HERITES, appeles avec un seul argument. Le `@action` du SDK
+  // Stream Deck est un decorateur STANDARD TC39, qui en recoit deux (valeur et
+  // contexte) — TypeScript 5 les gere nativement quand ces options sont
+  // absentes. Avec elles, les neuf actions echouent en TS1238 et rien ne
+  // compile : « the runtime will invoke the decorator with 1 arguments, but
+  // the decorator expects 2 ».
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

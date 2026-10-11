@@ -38,7 +38,7 @@ export class DeviceManager {
   private stateChangeCallbacks: ((sn: string, state: DeviceState) => void)[] = [];
 
   /**
-   * Initialize the device manager with EcoFlow credentials
+   * Initialize the device manager with EcoFlow API credentials
    */
   async initialize(credentials: EcoFlowCredentials, region: "us" | "eu" = "us"): Promise<void> {
     this.client = new EcoFlowClient(credentials, region);

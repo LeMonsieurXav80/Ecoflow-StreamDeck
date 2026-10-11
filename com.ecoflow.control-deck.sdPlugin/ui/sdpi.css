@@ -168,3 +168,44 @@ input[type="range"] {
 input[type="number"].small {
   width: 80px;
 }
+
+/* Email input */
+input[type="email"] {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 9pt;
+  color: var(--sdpi-color);
+  background-color: var(--sdpi-background);
+  border: 1px solid var(--sdpi-bordercolor);
+  border-radius: var(--sdpi-borderradius);
+  box-sizing: border-box;
+}
+
+input[type="email"]:focus {
+  outline: none;
+  border-color: #0078d7;
+}
+
+/* Status indicator */
+.sdpi-status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: var(--sdpi-borderradius);
+  font-size: 8pt;
+  font-weight: var(--sdpi-fontweight);
+}
+
+.sdpi-status.success {
+  background-color: rgba(0, 200, 0, 0.2);
+  color: #4caf50;
+}
+
+.sdpi-status.warning {
+  background-color: rgba(255, 165, 0, 0.2);
+  color: #ffa726;
+}
+
+.sdpi-status.error {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: #ef5350;
+}

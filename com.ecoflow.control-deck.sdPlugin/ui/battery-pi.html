@@ -8,6 +8,56 @@
 </head>
 <body>
   <div class="sdpi-wrapper">
+    <!-- EcoFlow API Configuration -->
+    <h2 class="sdpi-heading">EcoFlow API Configuration</h2>
+
+    <div class="sdpi-message info">
+      <p>Get your API credentials at <strong>developer.ecoflow.com</strong></p>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Access Key</label>
+      <div class="sdpi-item-value">
+        <input type="text" id="accessKey" placeholder="Your EcoFlow Access Key">
+      </div>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Secret Key</label>
+      <div class="sdpi-item-value">
+        <input type="password" id="secretKey" placeholder="Your EcoFlow Secret Key">
+      </div>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Region</label>
+      <div class="sdpi-item-value">
+        <select id="region">
+          <option value="us">United States / Global</option>
+          <option value="eu">Europe</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label">Status</label>
+      <div class="sdpi-item-value">
+        <span id="connectionStatus" class="sdpi-status warning">Not configured</span>
+      </div>
+    </div>
+
+    <div class="sdpi-item">
+      <label class="sdpi-item-label"></label>
+      <div class="sdpi-item-value">
+        <button id="saveCredentialsBtn">Save & Connect</button>
+      </div>
+    </div>
+
+    <div id="statusMessage" class="sdpi-message hidden"></div>
+
+    <div class="sdpi-separator"></div>
+
+    <!-- Device Selection -->
     <h2 class="sdpi-heading">Battery Status</h2>
 
     <div class="sdpi-item">

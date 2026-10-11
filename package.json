@@ -41,7 +41,8 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@elgato/streamdeck": "^1.0.0"
+    "@elgato/streamdeck": "^1.0.0",
+    "ecoflow_mqtt_credentials": "^1.0.1"
   },
   "engines": {
     "node": ">=20.0.0"

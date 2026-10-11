@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 /**
  * EcoFlow API Client
  * Handles authentication and communication with EcoFlow Cloud API
+ * Uses HMAC-SHA256 signature authentication with Access Key / Secret Key
  */
 
 export interface EcoFlowCredentials {
@@ -42,8 +43,8 @@ interface ApiResponse {
   data?: unknown;
 }
 
-const API_BASE_URL = "https://api-e.ecoflow.com";
-const API_BASE_URL_EU = "https://api-e.ecoflow.com"; // EU endpoint
+const API_BASE_URL_US = "https://api-a.ecoflow.com";
+const API_BASE_URL_EU = "https://api-e.ecoflow.com";
 
 export class EcoFlowClient {
   private accessKey: string;
@@ -53,25 +54,25 @@ export class EcoFlowClient {
   constructor(credentials: EcoFlowCredentials, region: "us" | "eu" = "us") {
     this.accessKey = credentials.accessKey;
     this.secretKey = credentials.secretKey;
-    this.baseUrl = region === "eu" ? API_BASE_URL_EU : API_BASE_URL;
+    this.baseUrl = region === "eu" ? API_BASE_URL_EU : API_BASE_URL_US;
+  }
+
+  /**
+   * Generate nonce from timestamp (base64 of sha256 hash, without last char)
+   */
+  private generateNonce(timestamp: string): string {
+    const hash = crypto.createHash("sha256").update(timestamp).digest("base64");
+    return hash.slice(0, -1); // Remove last character
   }
 
   /**
    * Generate HMAC-SHA256 signature for API authentication
+   * Note: Only accessKey, nonce, and timestamp are included in signature
+   * Request params (like sn) are NOT part of the signature
    */
-  private generateSignature(
-    params: Record<string, string>,
-    timestamp: string,
-    nonce: string
-  ): string {
-    // Sort parameters alphabetically and create query string
-    const sortedParams = Object.keys(params)
-      .sort()
-      .map((key) => `${key}=${params[key]}`)
-      .join("&");
-
-    // Create signature base string
-    const signatureBase = `${sortedParams}&accessKey=${this.accessKey}&nonce=${nonce}&timestamp=${timestamp}`;
+  private generateSignature(timestamp: string, nonce: string): string {
+    // Signature string format: accessKey=X&nonce=Y&timestamp=Z
+    const signatureBase = `accessKey=${this.accessKey}&nonce=${nonce}&timestamp=${timestamp}`;
 
     // Generate HMAC-SHA256 signature
     const hmac = crypto.createHmac("sha256", this.secretKey);
@@ -89,8 +90,8 @@ export class EcoFlowClient {
     body?: Record<string, unknown>
   ): Promise<T> {
     const timestamp = Date.now().toString();
-    const nonce = crypto.randomBytes(16).toString("hex");
-    const signature = this.generateSignature(params, timestamp, nonce);
+    const nonce = this.generateNonce(timestamp);
+    const signature = this.generateSignature(timestamp, nonce);
 
     const url = new URL(endpoint, this.baseUrl);
     Object.entries(params).forEach(([key, value]) => {
@@ -128,10 +129,11 @@ export class EcoFlowClient {
    * Get list of devices associated with the account
    */
   async getDevices(): Promise<EcoFlowDevice[]> {
-    const response = await this.request<{ devices: EcoFlowDevice[] }>(
+    const response = await this.request<EcoFlowDevice[]>(
       "/iot-open/sign/device/list"
     );
-    return response.devices || [];
+    // API returns array directly in data field
+    return Array.isArray(response) ? response : [];
   }
 
   /**
@@ -205,36 +207,42 @@ export class EcoFlowClient {
     const deviceData = (data as Record<string, Record<string, unknown>>).data || data;
 
     // Common field mappings across device types
-    const soc = this.extractNumber(deviceData, ["soc", "bms_bmsStatus.soc", "pd.soc"]);
+    const soc = this.extractNumber(deviceData, ["soc", "bms_bmsStatus.soc", "pd.soc", "bmsMaster.soc"]);
     const inputWatts = this.extractNumber(deviceData, [
       "wattsInSum",
       "pd.wattsInSum",
       "inv.inputWatts",
+      "inputWatts",
     ]);
     const outputWatts = this.extractNumber(deviceData, [
       "wattsOutSum",
       "pd.wattsOutSum",
       "inv.outputWatts",
+      "outputWatts",
     ]);
     const solarWatts = this.extractNumber(deviceData, [
       "mppt.inWatts",
       "pd.mpptInWatts",
       "pv1InputWatts",
       "pv2InputWatts",
+      "solarInputWatts",
     ]);
 
     const acOutEnabled = this.extractBoolean(deviceData, [
       "inv.cfgAcEnabled",
       "pd.acAutoOutConfig",
       "acOutState",
+      "inv.acOutState",
     ]);
     const dcOutEnabled = this.extractBoolean(deviceData, [
       "pd.dcOutState",
       "mppt.dcChgCurrent",
+      "dcOutState",
     ]);
     const acChargingEnabled = this.extractBoolean(deviceData, [
       "inv.cfgAcChgModeFlg",
       "pd.acChgState",
+      "acChgState",
     ]);
 
     let chargingState: "idle" | "charging" | "discharging" = "idle";
@@ -254,7 +262,7 @@ export class EcoFlowClient {
       acOutEnabled,
       dcOutEnabled,
       acChargingEnabled,
-      remainTime: this.extractNumber(deviceData, ["pd.remainTime", "bms_bmsStatus.remainTime"]),
+      remainTime: this.extractNumber(deviceData, ["pd.remainTime", "bms_bmsStatus.remainTime", "remainTime"]),
       chargingState,
     };
   }
@@ -290,8 +298,15 @@ export class EcoFlowClient {
 
   /**
    * Get nested value from object using dot notation path
+   * Also checks for flat keys with dots (e.g., "pd.soc" as a single key)
    */
   private getNestedValue(obj: Record<string, unknown>, path: string): unknown {
+    // First, try the path as a direct flat key (e.g., "pd.soc")
+    if (path in obj) {
+      return obj[path];
+    }
+
+    // Then try nested path
     const keys = path.split(".");
     let current: unknown = obj;
 
